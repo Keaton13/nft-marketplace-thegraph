@@ -13,15 +13,16 @@ export default function Home() {
     // 0x234
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
+    const nftAddress = networkMapping[chainString].BasicNft[0];
     const dispatch = useNotification()
 
     const { runContractFunction } = useWeb3Contract()
 
     async function approveAndList(data) {
         console.log("Approving...")
-        const nftAddress = data.data[0].inputResult
-        const tokenId = data.data[1].inputResult
-        const price = ethers.utils.parseUnits(data.data[2].inputResult, "ether").toString()
+        console.log(data);
+        const tokenId = data.data[0].inputResult
+        const price = ethers.utils.parseUnits(data.data[1].inputResult, "ether").toString()
 
         const approveOptions = {
             abi: nftAbi,
@@ -76,13 +77,6 @@ export default function Home() {
             <Form
                 onSubmit={approveAndList}
                 data={[
-                    {
-                        name: "NFT Address",
-                        type: "text",
-                        inputWidth: "50%",
-                        value: "",
-                        key: "nftAddress",
-                    },
                     {
                         name: "Token ID",
                         type: "number",
