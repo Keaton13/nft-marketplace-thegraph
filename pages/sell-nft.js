@@ -13,7 +13,7 @@ export default function Home() {
     // 0x234
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
-    const nftAddress = networkMapping[chainString].BasicNft[0]
+    const basicNftAddress = networkMapping[chainString].NftMarketplace[1]
     const dispatch = useNotification()
 
     const { runContractFunction } = useWeb3Contract()
@@ -26,7 +26,7 @@ export default function Home() {
 
         const approveOptions = {
             abi: nftAbi,
-            contractAddress: nftAddress,
+            contractAddress: basicNftAddress,
             functionName: "approve",
             params: {
                 to: marketplaceAddress,
@@ -36,21 +36,21 @@ export default function Home() {
 
         await runContractFunction({
             params: approveOptions,
-            onSuccess: () => handleApproveSuccess(nftAddress, tokenId, price),
+            onSuccess: () => handleApproveSuccess(basicNftAddress, tokenId, price),
             onError: (error) => {
                 console.log(error)
             },
         })
     }
 
-    async function handleApproveSuccess(nftAddress, tokenId, price) {
+    async function handleApproveSuccess(basicNftAddress, tokenId, price) {
         console.log("Ok! Now time to list")
         const listedOptions = {
             abi: nftMarketplaceAbi,
             contractAddress: marketplaceAddress,
             functionName: "listItem",
             params: {
-                nftAddress: nftAddress,
+                nftAddress: basicNftAddress,
                 tokenId: tokenId,
                 price: price,
             },
