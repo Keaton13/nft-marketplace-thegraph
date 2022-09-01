@@ -13,14 +13,14 @@ export default function Home() {
     // 0x234
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
-    const nftAddress = networkMapping[chainString].BasicNft[0];
+    const nftAddress = networkMapping[chainString].BasicNft[0]
     const dispatch = useNotification()
 
     const { runContractFunction } = useWeb3Contract()
 
     async function approveAndList(data) {
         console.log("Approving...")
-        console.log(data);
+        console.log(data)
         const tokenId = data.data[0].inputResult
         const price = ethers.utils.parseUnits(data.data[1].inputResult, "ether").toString()
 
@@ -73,26 +73,30 @@ export default function Home() {
     }
 
     return (
-        <div className={styles.container}>
-            <Form
-                onSubmit={approveAndList}
-                data={[
-                    {
-                        name: "Token ID",
-                        type: "number",
-                        value: "",
-                        key: "tokenId",
-                    },
-                    {
-                        name: "Price (in ETH)",
-                        type: "number",
-                        value: "",
-                        key: "price",
-                    },
-                ]}
-                title="Sell your NFT!"
-                id="Main Form"
-            />
+        <div className="grid grid-cols-3 gap-4 content-center mt-6">
+            <div class="relative w-96 h-96 ..."></div>
+            <div class="relative w-96 h-96 ...">
+                <Form
+                    onSubmit={approveAndList}
+                    data={[
+                        {
+                            name: "Token ID",
+                            type: "number",
+                            value: "",
+                            key: "tokenId",
+                        },
+                        {
+                            name: "Price (in ETH)",
+                            type: "number",
+                            value: "",
+                            key: "price",
+                        },
+                    ]}
+                    title="Sell your NFT!"
+                    id="Main Form"
+                />
+            </div>
+            <div class="relative w-96 h-96 ..."></div>
         </div>
     )
 }
