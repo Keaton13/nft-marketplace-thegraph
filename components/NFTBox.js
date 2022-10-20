@@ -97,7 +97,7 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     }
 
     return (
-        <div>
+        <div className="relative ...">
             <div>
                 {imageURI ? (
                     <div>
@@ -113,7 +113,6 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
                             description={tokenDescription}
                             onClick={handleCardClick}
                         >
-                            <div>
                                 <div className="flex flex-col item-end gap-2">
                                     <div>Token Id: {tokenId}</div>
                                     <div className="italic text-sm">
@@ -129,7 +128,6 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
                                         {ethers.utils.formatUnits(price, "ether")} ETH
                                     </div>
                                 </div>
-                            </div>
                         </Card>
                     </div>
                 ) : (

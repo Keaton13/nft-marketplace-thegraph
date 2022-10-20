@@ -13,7 +13,7 @@ export default function Home() {
     // 0x234
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
-    const basicNftAddress = networkMapping[chainString].BasicNft[0]
+    const basicNftAddress = networkMapping[chainString].NftMarketplace[1]
     const dispatch = useNotification()
 
     const { runContractFunction } = useWeb3Contract()
@@ -35,8 +35,8 @@ export default function Home() {
                 console.log(error)
             },
         })
-        const txReciept = await tx.wait(1);
-        handleMintSuccess(txReciept);
+        const txReciept = await tx.wait(1)
+        handleMintSuccess(txReciept)
     }
 
     const handleMintSuccess = async (txReciept) => {
@@ -106,30 +106,18 @@ export default function Home() {
     }
 
     return (
-        <div className={styles.container}>
-            <h2>Price</h2>
-            <h3>0.01</h3>
-            <button onClick={Mint}>MINT!</button>
-            {/* <Form
-                onSubmit={approveAndList}
-                data={[
-                    {
-                        name: "NFT Address",
-                        type: "text",
-                        inputWidth: "50%",
-                        value: "",
-                        key: "nftAddress",
-                    },
-                    {
-                        name: "Price (in ETH)",
-                        type: "number",
-                        value: "0.1",
-                        key: "price",
-                    },
-                ]}
-                title="Mint your NFT!"
-                id="Main Form"
-            /> */}
+        <div className="grid grid-cols-3 gap-4 content-center mt-6">
+            <div class="relative w-96 h-96 ...">
+            </div>
+            <div className="relative h-96 w-96 content center text-center bg-slate-100 shadow-2xl rounded-xl text-neutral-500 ...">
+                <div class="absolute inset-x-0 top-0 h-16 font-bold text-3xl ...">
+                    <h3 className="mt-6">Mint Your NFT</h3>
+                    <h5 className="mt-6 underline underline-offset-8 text-xl">Price: 0.01 eth</h5>
+                    <button className="rounded-xl text-center mt-6 h-12 text-base w-36 shadow-2xl bg-cyan-400" onClick={Mint}>Mint!</button>
+                </div>
+            </div>
+            <div className="relative h-96 w-96 ...">
+            </div>
         </div>
     )
 }

@@ -16,7 +16,7 @@ export default function Home() {
     return (
         <div className="container mx-auto">
             <h1 className="py-4 px-4 font-bold text-2xl">Recently Listed</h1>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap grid grid-cols-6 gap-4 content-center mt-6">
                 {isWeb3Enabled ? (
                     loading || !listedNfts ? (
                         <div>Loading...</div>
@@ -25,7 +25,6 @@ export default function Home() {
                             console.log(nft.attributes)
                             const { price, nftAddress, tokenId, seller } = nft
                             return (
-                                <div>
                                     <NFTBox
                                         price={price}
                                         nftAddress={nftAddress}
@@ -34,7 +33,6 @@ export default function Home() {
                                         seller={seller}
                                         key={`${nftAddress}${tokenId}`}
                                     />
-                                </div>
                             )
                         })
                     )
