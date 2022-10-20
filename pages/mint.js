@@ -14,7 +14,7 @@ export default function Home() {
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     console.log(chainString);
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
-    const basicNftAddress = networkMapping[chainString].NftMarketplace[1]
+    const basicNftAddress = networkMapping[chainString].BasicNft[0]
     const dispatch = useNotification()
 
     const { runContractFunction } = useWeb3Contract()
