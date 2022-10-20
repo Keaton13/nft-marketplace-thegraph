@@ -1,8 +1,4 @@
 {
-    "4": {
-        "NftMarketplace": ["0x694cef20aaCbC9fD53d416e51f928Db755c27a03", "0x3DF37Daa1e7453f12E10c4dF4dE9a62075E5374d"],
-        "BasicNft": ["0x3DF37Daa1e7453f12E10c4dF4dE9a62075E5374d"]
-    },
     "5": {
         "NftMarketplace": ["0xb9E00F95449102bD9572a38aF20c56039600F053"],
         "BasicNft": ["0x87F23Ba263BD8AeE8e71b42f31E8a4148A3FD30B"]
