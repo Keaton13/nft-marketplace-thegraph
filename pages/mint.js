@@ -12,6 +12,7 @@ export default function Home() {
     const { chainId } = useMoralis()
     // 0x234
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
+    console.log(chainString);
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
     const basicNftAddress = networkMapping[chainString].NftMarketplace[1]
     const dispatch = useNotification()
