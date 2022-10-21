@@ -11,9 +11,9 @@ import networkMapping from "../constants/networkMapping.json"
 export default function Home() {
     const { chainId } = useMoralis()
     // 0x234
-    const chainString = chainId ? parseInt(chainId).toString() : "31337"
+    const chainString = "5"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
-    const basicNftAddress = networkMapping[chainString].NftMarketplace[1]
+    const basicNftAddress = networkMapping[chainString].BasicNft[0]
     const dispatch = useNotification()
 
     const { runContractFunction } = useWeb3Contract()
