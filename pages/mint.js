@@ -44,8 +44,7 @@ export default function Home() {
         console.log("Minting Success!!")
         console.log(txReciept)
         let tokenId = txReciept.events[0].args.tokenId
-        let nftAddress = basicNftAddress
-        approveAndList(nftAddress, tokenId)
+        approveAndList(basicNftAddress, tokenId)
         dispatch({
             type: "success",
             message: "NFT Minted!!",
@@ -54,12 +53,12 @@ export default function Home() {
         })
     }
 
-    async function approveAndList(nftAddress, tokenId) {
-        console.log("Approve and List")
+    async function approveAndList(basicNftAddress, tokenId) {
+        console.log("Approving...")
         let price = ethers.utils.parseEther("0.1")
         const approveOptions = {
             abi: nftAbi,
-            contractAddress: nftAddress,
+            contractAddress: basicNftAddress,
             functionName: "approve",
             params: {
                 to: marketplaceAddress,
@@ -69,22 +68,22 @@ export default function Home() {
 
         const tx2 = await runContractFunction({
             params: approveOptions,
-            onSuccess: () => handleApproveSuccess(nftAddress, tokenId, price),
+            onSuccess: () => handleApproveSuccess(basicNftAddress, tokenId, price),
             onError: (error) => {
                 console.log(error)
             },
         })
     }
 
-    async function handleApproveSuccess(nftAddress, tokenId, price) {
+    async function handleApproveSuccess(basicNftAddress, tokenId, price) {
         console.log("Ok! Now time to list")
-        console.log(nftAddress, tokenId, price)
+        console.log(basicNftAddress, tokenId, price)
         const listedOptions = {
             abi: nftMarketplaceAbi,
             contractAddress: marketplaceAddress,
             functionName: "listItem",
             params: {
-                nftAddress: nftAddress,
+                nftAddress: basicNftAddress,
                 tokenId: tokenId,
                 price: price,
             },
