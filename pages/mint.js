@@ -78,6 +78,8 @@ export default function Home() {
 
     async function handleApproveSuccess(nftAddress, tokenId, price) {
         console.log("Ok! Now time to list")
+        console.log("Price", price);
+        console.log("Price with Ethers", ethers.utils.parseEther(price));
         const listedOptions = {
             abi: nftMarketplaceAbi,
             contractAddress: marketplaceAddress,
