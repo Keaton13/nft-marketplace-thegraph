@@ -56,6 +56,9 @@ export default function Home() {
     async function approveAndList(basicNftAddress, tokenId) {
         console.log("Approving...")
         let price = ethers.utils.parseEther("0.1")
+        let price2 = ethers.utils.parseUnits("0.1", "ether")
+        console.log(price)
+        console.log(price2)
         const approveOptions = {
             abi: nftAbi,
             contractAddress: basicNftAddress,
