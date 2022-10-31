@@ -56,7 +56,7 @@ export default function Home() {
     async function approveAndList(basicNftAddress, tokenId) {
         console.log("Approving...")
         let price = "100000000000000000"
-        tokenId = ethers.BigNumber.from(tokenId)
+        tokenId = ethers.BigNumber.from(tokenId._hex)
         console.log(price)
         console.log(tokenId)
         const approveOptions = {
