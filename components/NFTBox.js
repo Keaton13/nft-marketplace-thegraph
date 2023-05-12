@@ -21,6 +21,7 @@ const truncateStr = (fullStr, strLen) => {
 }
 
 export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress, seller }) {
+    console.log(price, nftAddress, tokenId, marketplaceAddress, seller)
     const { isWeb3Enabled, account } = useMoralis()
     const [imageURI, setImageURI] = useState("")
     const [tokenName, setTokenName] = useState("")
@@ -28,6 +29,13 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     const [showModal, setShowModal] = useState(false)
     const hideModal = () => setShowModal(false)
     const dispatch = useNotification()
+
+
+    useEffect(() => {
+        if (isWeb3Enabled) {
+            updateUI()
+        }
+    }, [isWeb3Enabled])
 
     const { runContractFunction: getTokenURI } = useWeb3Contract({
         abi: nftAbi,
@@ -59,6 +67,7 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
             const tokenURIResponse = await (await fetch(requestUrl)).json()
             const imageURI = tokenURIResponse.image
             const imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/")
+            console.log(imageURI)
             setImageURI(imageURIURL)
             setTokenName(tokenURIResponse.name)
             setTokenDescription(tokenURIResponse.description)
@@ -69,11 +78,6 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
         // using the image tag from the imageURI, get the image
     }
 
-    useEffect(() => {
-        if (isWeb3Enabled) {
-            updateUI()
-        }
-    }, [isWeb3Enabled])
 
     const isOwnedByUser = seller === account || seller === undefined
     const formattedSellerAddress = isOwnedByUser ? "you" : truncateStr(seller || "", 15)
